@@ -22,7 +22,7 @@ namespace ClinicaSaint.Domain.Entities.Catalogos
 
         [Required]
         [StringLength(20)]
-        public int Identificacion { get; set; }
+        public string Identificacion { get; set; }
         public GeneroEnum Genero { get; set; }
 
         [Required]

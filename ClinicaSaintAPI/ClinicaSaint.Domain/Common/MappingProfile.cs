@@ -31,11 +31,11 @@ namespace ClinicaSaint.Domain.Common
             CreateMap<CSModel.Catalogos.Medico, MedicoDto>();
             CreateMap<MedicoDto, CSModel.Catalogos.Medico>();
 
-            CreateMap<CSModel.Catalogos.Medico, MedicoDto.Actualizar>();
-            CreateMap<MedicoDto.Actualizar, CSModel.Catalogos.Medico>();
+            CreateMap<CSModel.Catalogos.Medico, ActualizarActualizarMedicoDTO>();
+            CreateMap<ActualizarActualizarMedicoDTO, CSModel.Catalogos.Medico>();
 
-            CreateMap<MedicoDto.Actualizar, MedicoDto>();
-            CreateMap<MedicoDto, MedicoDto.Actualizar>();
+            CreateMap<ActualizarActualizarMedicoDTO, MedicoDto>();
+            CreateMap<MedicoDto, ActualizarActualizarMedicoDTO>();
 
             #endregion
 

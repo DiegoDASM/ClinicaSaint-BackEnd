@@ -20,13 +20,13 @@ namespace ClinicaSaint.Domain.Entities.Catalogos
         public string NombreCompleto { get; set; }
 
         [Required]
-        public int Cedula { get; set; }
+        public string Cedula { get; set; }
 
         [Required]
         public DateTime? FechaNacimiento { get; set; }
 
         [Required]
-        public int Edad { get; set; }
+        public decimal Edad { get; set; }
         public GeneroEnum Genero { get; set; }
 
         [StringLength(30)]
