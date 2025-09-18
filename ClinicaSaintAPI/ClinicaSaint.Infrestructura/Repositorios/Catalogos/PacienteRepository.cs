@@ -1,69 +1,64 @@
 ﻿using AutoMapper;
+using ClinicaSaint.API.Controllers.Catalogos;
+using ClinicaSaint.Domain.Dto.Catalogos;
 using ClinicaSaint.Domain.Dto.Reserva;
-using ClinicaSaint.Domain.Entities.Reserva;
-using ClinicaSaint.Domain.Interfaces.Reserva;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using entReserva = ClinicaSaint.Domain.Entities;
 
-namespace ClinicaSaint.Infrestructura.Repositorios.Reserva
+namespace ClinicaSaint.Infrestructura.Repositorios.Catalogos
 {
-    public class ReservaConsultaRepository : IReservaConsultaRepository
+    public class PacienteRepository : IPacienteRepository
     {
         private readonly ApplicationDBContext _context;
         private readonly IMapper _mapper;
-        public ReservaConsultaRepository(ApplicationDBContext context, IMapper mapper)
+
+        public PacienteRepository(ApplicationDBContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
         }
-        public async Task<ReservaConsultaExternaDto[]> GetDataAll()
+
+        public async Task<PacienteDto[]> GetDataAll()
         {
             try
             {
-                var data = await _context.ReservaConsultaExternas
-                .Where(e => e.Activo) // Filtra por estado activo
-                .Include(rc => rc.Paciente)
-                .Include(rc => rc.Medico)
-                .ToListAsync();
-
-                // Mapea la lista de entidades a DTOs
-                var dtos = _mapper.Map<ReservaConsultaExternaDto[]>(data);
-                return dtos;
+                var data = await _context.Paciente
+                    .Where(e => e.Activo)
+                    .ToListAsync();
+                var dta = _mapper.Map<PacienteDto[]>(data);
+                return dta;
             }
             catch (Exception ex)
             {
 
-                throw new Exception("Error al obtener las Reservas", ex);
+                throw new Exception("Error al obtener los pacientes", ex);
             }
         }
-
-        public async Task<ReservaConsultaExternaDto> Save(ReservaConsultaExternaDto.Actualizar dataSave)
+        public async Task<PacienteDto> Save(PacienteDto.Actualizar dataSave)
         {
-            int idReservaConsulta = 0;
+            int IdPaciente = 0;
 
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = _mapper.Map<entReserva.Reserva.ReservaConsultaExterna>(dataSave);
+                    var data = _mapper.Map<entReserva.Catalogos.Paciente>(dataSave);
                     data.FechaRegistro = DateTime.Now;
                     data.IpRegistro = ""; // Consider getting the actual IP if needed
                     data.UsuarioRegistro = ""; // Consider getting the actual user if needed
 
-                    _context.ReservaConsultaExternas.Add(data);
+                    _context.Paciente.Add(data);
                     await _context.SaveChangesAsync();
 
-                    idReservaConsulta = data.IdReservaConsultaExterna; // Assuming Id is auto-incremented
+                    IdPaciente = data.IdPaciente; // Assuming Id is auto-incremented
                     transaction.Commit();
 
-                    var result = _mapper.Map<ReservaConsultaExternaDto>(data);
+                    var result = _mapper.Map<PacienteDto>(data);
                     return result;
                 }
                 catch (Exception ex)
@@ -73,15 +68,15 @@ namespace ClinicaSaint.Infrestructura.Repositorios.Reserva
                 }
             }
         }
-        public async Task<ReservaConsultaExternaDto> Update(ReservaConsultaExternaDto.Actualizar dataUpdate)
+        public async Task<PacienteDto> Update(PacienteDto.Actualizar dataUpdate)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
                     // Buscar la entidad existente
-                    var existingData = await _context.ReservaConsultaExternas
-                        .FirstOrDefaultAsync(r => r.IdReservaConsultaExterna == dataUpdate.IdReservaConsultaExterna);
+                    var existingData = await _context.Paciente
+                        .FirstOrDefaultAsync(r => r.IdPaciente == dataUpdate.IdPaciente);
                     if (existingData == null)
                     {
                         throw new KeyNotFoundException("La reserva de consulta externa no existe.");
@@ -91,13 +86,13 @@ namespace ClinicaSaint.Infrestructura.Repositorios.Reserva
                     _mapper.Map(dataUpdate, existingData);
 
                     // Marcar la entidad como modificada y guardar cambios
-                    _context.ReservaConsultaExternas.Update(existingData);
+                    _context.Paciente.Update(existingData);
                     await _context.SaveChangesAsync();
 
                     transaction.Commit();
 
                     // Retornar la entidad actualizada mapeada al DTO
-                    var result = _mapper.Map<ReservaConsultaExternaDto>(existingData);
+                    var result = _mapper.Map<PacienteDto>(existingData);
                     return result;
                 }
                 catch (Exception ex)
@@ -107,14 +102,14 @@ namespace ClinicaSaint.Infrestructura.Repositorios.Reserva
                 }
             }
         }
-        public async Task DeleteById(int idReservaConsultaExterna)
+        public async Task DeleteById(int idPaciente)
         {
             using (var transaction = _context.Database.BeginTransaction())
             {
                 try
                 {
-                    var data = await _context.ReservaConsultaExternas
-                        .FirstOrDefaultAsync(r => r.IdReservaConsultaExterna == idReservaConsultaExterna);
+                    var data = await _context.Paciente
+                        .FirstOrDefaultAsync(r => r.IdPaciente == idPaciente);
                     if (data == null)
                     {
                         throw new Exception("La reserva de consulta externa no existe.");

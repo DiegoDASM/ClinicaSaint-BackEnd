@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClinicaSaint.Domain.Dto.Catalogos
 {
-    public class QuirofanoDto
+    public partial class QuirofanoDto
     {
         public int IdQuirofano { get; set; }
         public string Nombre { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClinicaSaint.Domain.Dto.Catalogos
 {
-    public class ClienteDto
+    public partial class ClienteDto
     {
         public int IdCliente { get; set; }
         public string Nombres { get; set; }

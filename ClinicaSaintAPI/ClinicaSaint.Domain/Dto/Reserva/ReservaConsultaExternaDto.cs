@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace ClinicaSaint.Domain.Dto.Reserva
 {
-    public class ReservaConsultaExternaDto
+    public partial class ReservaConsultaExternaDto
     {
-        public int IdConsultaExterna { get; set; }
+        public int IdReservaConsultaExterna { get; set; }
         public string NumeroConsulta { get; set; }
         public DateTime Fecha { get; set; }
         public TimeSpan Hora { get; set; }
@@ -23,7 +23,7 @@ namespace ClinicaSaint.Domain.Dto.Reserva
 
         public class Actualizar
         {
-            public int IdConsultaExterna { get; set; }
+            public int IdReservaConsultaExterna { get; set; }
             public string NumeroConsulta { get; set; }
             public DateTime Fecha { get; set; }
             public TimeSpan Hora { get; set; }

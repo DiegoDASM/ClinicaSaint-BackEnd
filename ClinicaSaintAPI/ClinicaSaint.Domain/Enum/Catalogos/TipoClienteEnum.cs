@@ -8,8 +8,6 @@ namespace ClinicaSaint.Domain.Enum.Catalogos
 {
     public enum TipoClienteEnum
     {
-        Convenio,
-        Empleado,
-        Medico
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ClinicaSaint.Domain.Dto.Catalogos;
 using ClinicaSaint.Domain.Dto.Reserva;
 using ClinicaSaint.Domain.Entities.Reserva;
 using System;
@@ -15,6 +16,30 @@ namespace ClinicaSaint.Domain.Common
         public MappingProfile()
         {
             #region Mapeo de Catalogos
+            
+            CreateMap<CSModel.Catalogos.Paciente, PacienteDto>();
+            CreateMap<PacienteDto, CSModel.Catalogos.Paciente>();
+
+            CreateMap<CSModel.Catalogos.Paciente, PacienteDto.Actualizar>();
+            CreateMap<PacienteDto.Actualizar, CSModel.Catalogos.Paciente>();
+
+            CreateMap<PacienteDto.Actualizar, PacienteDto>();
+            CreateMap<PacienteDto, PacienteDto.Actualizar>();
+
+            //--------------------------------------------------
+
+            CreateMap<CSModel.Catalogos.Medico, MedicoDto>();
+            CreateMap<MedicoDto, CSModel.Catalogos.Medico>();
+
+            CreateMap<CSModel.Catalogos.Medico, MedicoDto.Actualizar>();
+            CreateMap<MedicoDto.Actualizar, CSModel.Catalogos.Medico>();
+
+            CreateMap<MedicoDto.Actualizar, MedicoDto>();
+            CreateMap<MedicoDto, MedicoDto.Actualizar>();
+
+            #endregion
+
+            #region Mapeo de Reservas
 
             CreateMap<CSModel.Reserva.ReservaConsultaExterna, ReservaConsultaExternaDto>();
             CreateMap<ReservaConsultaExternaDto, CSModel.Reserva.ReservaConsultaExterna>();

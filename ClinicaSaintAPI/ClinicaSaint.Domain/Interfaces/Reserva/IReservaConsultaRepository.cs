@@ -10,7 +10,9 @@ namespace ClinicaSaint.Domain.Interfaces.Reserva
 {
     public interface IReservaConsultaRepository
     {
-       public Task<ReservaConsultaExterna[]> GetDataAll();
+       public Task<ReservaConsultaExternaDto[]> GetDataAll();
        public Task<ReservaConsultaExternaDto> Save(ReservaConsultaExternaDto.Actualizar dataSave);
+       public Task<ReservaConsultaExternaDto> Update(ReservaConsultaExternaDto.Actualizar dataUpdate);
+       public Task DeleteById(int idReservaConsultaExterna);
     }
 }

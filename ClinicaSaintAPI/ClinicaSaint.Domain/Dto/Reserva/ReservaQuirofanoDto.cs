@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ClinicaSaint.Domain.Dto.Reserva
 {
-    public class ReservaQuirofanoDto
+    public partial class ReservaQuirofanoDto
     {
         public int IdReservaQuirofano { get; set; }
         public string NumeroReserva { get; set; }

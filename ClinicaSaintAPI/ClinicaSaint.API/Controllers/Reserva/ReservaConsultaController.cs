@@ -16,22 +16,22 @@ namespace ClinicaSaint.API.Controllers.Reserva
             _reservaConsultaRepository = reservaConsultaRepository;
         }
 
-        [HttpGet]
+        [HttpGet("GetAll/")]
         public async Task<ActionResult> GetAll()
         {
             try
             {
                 var data = await _reservaConsultaRepository.GetDataAll();
-                return Ok(new JsonResponse<ReservaConsultaExterna[]>(data));
+                return Ok(new JsonResponse<ReservaConsultaExternaDto[]>(data));
             }
             catch (Exception ex)
             {
 
-                return BadRequest(new JsonResponse<ReservaConsultaExterna[]>(null, ex.Message, ResponseStatus.error));
+                return BadRequest(new JsonResponse<ReservaConsultaExternaDto[]>(null, ex.Message, ResponseStatus.error));
             }
         }
 
-        [HttpPost]
+        [HttpPost("Save/")]
         public async Task<ActionResult> Save([FromBody] ReservaConsultaExternaDto.Actualizar dataSave)
         {
             try
@@ -45,6 +45,34 @@ namespace ClinicaSaint.API.Controllers.Reserva
                 return BadRequest(new JsonResponse<ReservaConsultaExternaDto>(null, ex.Message, ResponseStatus.error));
             }
 
+        }
+        [HttpPut("Update/")]
+        public async Task<ActionResult> Update([FromBody] ReservaConsultaExternaDto.Actualizar dataUpdate)
+        {
+            try
+            {
+                // Lógica para actualizar la reserva de consulta externa
+                var data = await _reservaConsultaRepository.Update(dataUpdate);
+                return Ok(new JsonResponse<ReservaConsultaExternaDto>(data));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new JsonResponse<ReservaConsultaExternaDto>(null, ex.Message, ResponseStatus.error));
+            }
+        }
+        [HttpDelete("Delete/{id}")]
+        public async Task<ActionResult> Delete(int id)
+        {
+            try
+            {
+                await _reservaConsultaRepository.DeleteById(id);
+
+                return Ok(new JsonResponse<bool>(true));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new JsonResponse<string>(null, ex.Message, ResponseStatus.error));
+            }
         }
     }
 }

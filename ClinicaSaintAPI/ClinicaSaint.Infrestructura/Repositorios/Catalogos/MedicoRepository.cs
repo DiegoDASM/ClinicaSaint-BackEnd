@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClinicaSaint.Domain.Helpers
+namespace ClinicaSaint.Infrestructura.Repositorios.Catalogos
 {
-    public class EnumHelperConversiones
+    public class MedicoRepository
     {
     }
 }

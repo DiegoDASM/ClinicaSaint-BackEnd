@@ -8,8 +8,8 @@ namespace ClinicaSaint.Domain.Enum.Catalogos
 {
     public enum GeneroEnum
     {
-        Masculino,
-        Femenino,
-        Otros
+        Masculino = 1,
+        Femenino = 2,
+        Otro = 3
     }
 }
