@@ -8,6 +8,6 @@ namespace ClinicaSaint.API.Controllers.Catalogos
         public Task<PacienteDto[]> GetDataAll();
         public Task<PacienteDto> Save(PacienteDto.Actualizar dataSave);
         public Task<PacienteDto> Update(PacienteDto.Actualizar dataUpdate);
-        public Task DeleteById(int idPaciente);
+        public Task DeleteById(int id);
     }
 }
