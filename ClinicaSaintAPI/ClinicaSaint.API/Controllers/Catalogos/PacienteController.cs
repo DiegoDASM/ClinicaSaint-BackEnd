@@ -59,11 +59,11 @@ namespace ClinicaSaint.API.Controllers.Catalogos
             }
         }
         [HttpDelete("Delete/{id}")]
-        public async Task<ActionResult> Delete(int idPaciente)
+        public async Task<ActionResult> Delete(int id)
         {
             try
             {
-                await _pacienteRepository.DeleteById(idPaciente);
+                await _pacienteRepository.DeleteById(id);
 
                 return Ok(new JsonResponse<bool>(true));
             }

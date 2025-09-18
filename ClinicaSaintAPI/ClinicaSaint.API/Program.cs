@@ -1,6 +1,7 @@
 using AutoMapper;
 using ClinicaSaint.API.Controllers.Catalogos;
 using ClinicaSaint.Domain.Common;
+using ClinicaSaint.Domain.Interfaces.Catalogos;
 using ClinicaSaint.Domain.Interfaces.Reserva;
 using ClinicaSaint.Infrestructura;
 using ClinicaSaint.Infrestructura.Repositorios.Catalogos;
@@ -62,6 +63,7 @@ namespace ClinicaSaint.API
 
             builder.Services.AddScoped<IReservaConsultaRepository, ReservaConsultaRepository>();
             builder.Services.AddScoped<IPacienteRepository, PacienteRepository>();
+            builder.Services.AddScoped<IMedicoRepository, MedicoRepository>();
 
             var app = builder.Build();
 
